@@ -1,0 +1,13 @@
+#Ignore all log files
+*.log
+/logs
+/.vscode
+/__pycache__
+
+#ignore compiled pieces
+*.pyc
+/*/__pycache__
+
+#Ignore testing scripts
+test*.*
+Notes.txt

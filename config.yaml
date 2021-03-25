@@ -1,0 +1,18 @@
+region: 'us-east-1' #API expects the AWS Region to always be set to "us-east-1" regardless of where your instance is actually located.
+host: "HOSTNAME"
+mongo_url_list:
+  - mongodb://MONGODB:27017
+secured: false
+httpPort: "82"
+httsPort: "4432"
+service: "cloudbasic"
+basePath: "/api/"
+method: "POST"
+content_type: "application/json"
+access_key: 'YOURACCESSKEY'
+secret_key: 'YOURSECRETKEY'
+cluster:
+  remoteServer: "0.0.0.0"
+  remotePort: "81"
+  PublicKey: "YOUR.PUBLIC.KEY.ID"
+  PrivateKey: "YOUR.PRIVATE.KEY.VALUE"
