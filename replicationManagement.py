@@ -83,7 +83,7 @@ class repMan:
         '''
         https://cloudbasic.net/documentation/api/CreateRedshiftReplication
         '''
-    def alterRedShitReplication(self):
+    def alterRedShiftReplication(self):
         '''
         https://cloudbasic.net/documentation/api/CreateRedshiftReplication
         '''
@@ -111,11 +111,16 @@ class repMan:
 
         return r.json()
 
-    def getLogs(self):
+    def getLogs(self,endpoint):
         print("Get Logs Called")
         '''
         https://cloudbasic.net/documentation/api/getlogs/
         '''
+        print('Request URL = ' + endpoint)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
+        print('Response code: ', r.status_code)
+
+        return r.json()
     
     def rebuiltDbReplicaIndexes(self):
         print("Rebuild DB Replica Indexes Called")

@@ -1,5 +1,7 @@
 # CloudBasic API
 
+## **Incomplete other than the AWS Signature module --> WORK IN PROGRESS**
+
 <https://cloudbasic.net/documentation/api/>
 
 CloudBasic Library - Complete with all API endpoints using AWS Signature (v4) authentication
@@ -18,4 +20,4 @@ So we have to pass 'x-amz-content-sha256:' + payload_hash in the canonical_heade
 
 ## Testing
 
-Provided a test_script to run manual operations.  It will write a GetReplicationsList to disk for your viewing pleasure.
+Provided a test_script to run manual operations.  Also included common.py for loading the config and running Mongo queries, if any.

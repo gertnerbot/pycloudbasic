@@ -1,5 +1,6 @@
 region: 'us-east-1' #API expects the AWS Region to always be set to "us-east-1" regardless of where your instance is actually located.
 host: "HOSTNAME"
+mongo: false
 mongo_url_list:
   - mongodb://MONGODB:27017
 secured: false
