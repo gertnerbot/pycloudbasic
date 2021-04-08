@@ -1,5 +1,5 @@
 import requests,json
-from CloudBasicAuth import cloudBasicAuth as cba
+from pycloudbasic.CloudBasicAuth import cloudBasicAuth as cba
 from common import common as c
 
 class repMan:
@@ -47,7 +47,10 @@ class repMan:
         r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
         print('Response code: ', r.status_code)
 
-        return r.json()
+        if r.status_code not in [200]:
+            print("Error Occurred on Return",r.text)
+        else:
+            return r.json()
 
 
     def replicationStatus(self,endpoint):

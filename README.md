@@ -18,6 +18,12 @@ CloudBasic API does not send anything in Query Parameters, but rather all in the
 
 So we have to pass 'x-amz-content-sha256:' + payload_hash in the canonical_headers to account for that.
 
+## Gotchas
+
+Each METHOD ("GET" or "POST") has to be explicitly defined for the Signature and for the API request.  If a GET is used on the request (i.e. ReplicationServiceStatus), then GET also needs to be passed to the CloudBasicAuth module for signing.
+
+CloudBasicAuth takes the METHOD from the Config file by default.
+
 ## Testing
 
 Provided a test_script to run manual operations.  Also included common.py for loading the config and running Mongo queries, if any.

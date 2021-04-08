@@ -3,9 +3,14 @@ from common import common as c
 cfg = c.load_master_config()
 
 class cloudBasicAuth:
-    def __init__(self):
-        print("Cloud Basic Auth Called")
-        self.method = cfg['method']
+    def __init__(self,method=None):
+        print("Cloud Basic Auth Initialized")
+        print("method: ",method)
+        if not method:
+            self.method = cfg['method']
+        else:
+            self.method = method
+        
         self.service = cfg['service']
         self.region = cfg['region']
         self.content_type = cfg['content_type']
