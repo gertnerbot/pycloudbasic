@@ -1,5 +1,6 @@
 import sys, os,yaml,requests,json,argparse,time
 from pycloudbasic import replicationManagement as rm
+from pycloudbasic import systemWideManagement as swm
 # from py_cloudbasic.replicationManagement import replicationManagement as rm
 from common import common as c
 cfg = c.load_master_config()
@@ -7,9 +8,9 @@ cfg = c.load_master_config()
 client = c.connect_to_mongo()
 cbdb = client.cloudbasic
 repList = cbdb.replication_list
+latCol = cbdb.latency
 curTime = int(time.time())
 def main(command_line=None):
-
     host = cfg['host'] + ":" + cfg['httpPort']
     hostUri = 'http://' + host
     helpText = "Runs API calls against the CloudBasic server"
@@ -34,6 +35,8 @@ def main(command_line=None):
 
     getLogs = subparsers.add_parser("getLogs",help="Pulls the logs of the given replication ID")
     getLogs.add_argument("-id",'--repId',dest='repId')
+
+    repSerStat = subparsers.add_parser("repServiceStatus",help="ReplicationServiceStatus - Retrieves the Status of the ReplicationService process.")
 
     try:
         args = parser.parse_args(command_line)
@@ -60,12 +63,21 @@ def main(command_line=None):
             print(found_doc)
         else:
             print("Mongo Not Enabled, ignoring")
+    
+    elif args.api == "repServiceStatus":
+        action = "/api/ReplicationServiceStatus"
+        endpoint = hostUri + action
+        request_parameters = ''
+        method = 'GET'
+        response = swm.sysMan.ReplicationServiceStatus(swm.sysMan(host,action,request_parameters,method),endpoint)
+        print(response)
 
     elif args.api == "repStatus":
         repId = args.repId
         action = "/api/ReplicationStatus"
         endpoint = hostUri + action
         request_parameters =  '{"Id":"'+ repId + '"}'
+        
         response = rm.repMan.replicationStatus(rm.repMan(host,action,request_parameters),endpoint)
         
         print(response)
@@ -105,9 +117,13 @@ def main(command_line=None):
             request_parameters =  '{"replicationId":"'+repId + '","Period":' + hours + '}'
             response = rm.repMan.getLatency(rm.repMan(host,action,request_parameters),endpoint)
             latencyList.append(response)
-        
-        with open("LatencyList_" +str(curTime) + ".json",'w+') as outFile:
-            json.dump(latencyList,outFile, ensure_ascii=False, indent=4)
+        print(latencyList)
+        if cfg['mongo'] == True:
+            print("writing to mongo")
+            latCol.insert_many(latencyList)
+        else:
+            with open("LatencyList_" +str(curTime) + ".json",'w+') as outFile:
+                json.dump(latencyList,outFile, ensure_ascii=False, indent=4)
     
 
 if __name__ == "__main__":
