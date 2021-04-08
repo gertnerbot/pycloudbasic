@@ -1,0 +1,49 @@
+{
+	"replicationMethod": "ContinuousWithAutoSeeding",
+	"replicateLoginsUsersAndRoles": true,
+	"replicateTablesOnly": false,
+	"parallelTablesLimit": 5,
+	"rebuildIndexes": false,
+	"stagingBufferType": "TempDb",
+	"tde": {
+		"certificateName": null,
+		"keyAlgorithm": null
+	},
+	"source": {
+		"connectionString": "Data Source=your-source-db-server;Initial Catalog=your-source-db;Persist Security Info=False;User ID=user-name;Password=******;Connect Timeout=1280",
+		"encryptDataInTransit": false,
+		"changeTrackingRetentionPeriod": "2 DAYS",
+		"resetChangeTracking": false
+	},
+	"destination": {
+		"connectionString":"ConnectionString>Data Source=you-server-name.database.windows.net;Initial Catalog=your-database-name;Persist Security Info=False;User ID=user-name;Password=******;Connect Timeout=12800",
+		"encryptDataInTransit": false,
+		"azureServerTier": null,
+		"azureMaxDbSize": null,
+		"replicateCompatibilityLevel": true,
+		"customDbCreateScript": null,
+		"preSeedingCustomAction": null,
+		"postSeedingCustomAction": null
+	},
+	"tablesToExclude": null,
+	"storedProceduresToExclude": null,
+	"addUpdateTimestamp": false,
+	"reseedingSchedule": {
+		"noPkTablesToInclude": null,
+		"pkTablesToInclude": null,
+		"fromTime": null,
+		"toTime": null,
+		"repeatIntervalInMinutes": null,
+		"processTimeoutInMinutes": null,
+		"serializedProcessTimeoutInMinutes": null,
+		"autoSerializedProcessTimeoutInMinutes": null
+	},
+	"RebuildDbReplicaIndexesSchedule": {
+		"enabled": false,
+		"recurrence": "Weekly",
+		"weekDays": "Saturday",
+		"fromTime": "12:00:00 AM",
+		"toTime": "12:15:59 AM",
+		"parallelIndexesRebuildLimit": 10
+	}
+}

@@ -14,11 +14,19 @@ class repMan:
         'Authorization':authorization_header}
 
 
-    def createReplications(self):
+    def createReplication(self,endpoint):
         print("Create Replication Called")
         '''
         https://cloudbasic.net/documentation/api/CreateReplication/
         '''
+        print('Request URL = ' + endpoint)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
+        print('Response code: ', r.status_code)
+
+        if r.status_code not in [200]:
+            print("Error Occurred on Return",r.text)
+        else:
+            return r.json()
     
     def finalizeReplication(self):
         print("Finalize Replication Called")
@@ -64,11 +72,21 @@ class repMan:
 
         return r.json()
 
-    def alterReplication(self):
+    def alterReplication(self,endpoint):
         print("Alter Replication Called")
         '''
         https://cloudbasic.net/documentation/api/AlterReplication
         '''
+        print('Request URL = ' + endpoint)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
+        print('Response code: ', r.status_code)
+
+        if r.status_code not in [200]:
+            print("Error Occurred on Return",r.text)
+        else:
+            #This has to be done because there is NO response body
+            return "Successfull Altered Replication Job"
+    
     
     def deleteReplication(self):
         print("Delete Replication Called")
@@ -76,11 +94,21 @@ class repMan:
         https://cloudbasic.net/documentation/api/DeleteReplication
         '''
 
-    def analyzeReplication(self):
+    def analyzeReplication(self,endpoint):
         print("Analyze Replication Called")
         '''
         https://cloudbasic.net/documentation/api/AnalyzeReplication
         '''
+
+        print('Request URL = ' + endpoint)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
+        print('Response code: ', r.status_code)
+
+        if r.status_code not in [200]:
+            print("Error Occurred on Return",r.text)
+        else:
+            return r.json()
+
 
     def createRedShiftReplication(self):
         '''

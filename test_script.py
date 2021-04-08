@@ -1,7 +1,6 @@
 import sys, os,yaml,requests,json,argparse,time
 from pycloudbasic import replicationManagement as rm
 from pycloudbasic import systemWideManagement as swm
-# from py_cloudbasic.replicationManagement import replicationManagement as rm
 from common import common as c
 cfg = c.load_master_config()
 

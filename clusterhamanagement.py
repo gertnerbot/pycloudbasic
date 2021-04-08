@@ -3,10 +3,10 @@ from pycloudbasic.CloudBasicAuth import cloudBasicAuth as cba
 from common import common as c
 
 class multiazhacluster:
-    def __init__(self,host,action,request_parameters,method=None):
+    def __init__(self,host,action,request_parameters):
         print("Multi-AZ HA Cluster Management Called")
         self.request_parameters = request_parameters
-        content_type,amz_date,payload_hash,authorization_header = cba.createSignture(cba(method),host,action,self.request_parameters)
+        content_type,amz_date,payload_hash,authorization_header = cba.createSignture(cba(),host,action,self.request_parameters)
     
         self.headers = {'Content-Type':content_type,
         'X-Amz-Date':amz_date,
@@ -63,7 +63,7 @@ class multiazhacluster:
         https://cloudbasic.net/documentation/api/PromoteDbReplicaToPrimary/
         '''
         print('Request URL = ' + endpoint)
-        r = requests.get(endpoint, data=self.request_parameters, headers=self.headers)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
         print('Response code: ', r.status_code)
 
         if r.status_code not in [200]:
@@ -77,7 +77,7 @@ class multiazhacluster:
         https://cloudbasic.net/documentation/api/PromoteDbReplicaToPrimaryStatus/
         '''
         print('Request URL = ' + endpoint)
-        r = requests.get(endpoint, data=self.request_parameters, headers=self.headers)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
         print('Response code: ', r.status_code)
 
         if r.status_code not in [200]:

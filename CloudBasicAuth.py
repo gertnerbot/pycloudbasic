@@ -5,7 +5,6 @@ cfg = c.load_master_config()
 class cloudBasicAuth:
     def __init__(self,method=None):
         print("Cloud Basic Auth Initialized")
-        print("method: ",method)
         if not method:
             self.method = cfg['method']
         else:
