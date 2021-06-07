@@ -34,11 +34,19 @@ class repMan:
         https://cloudbasic.net/documentation/api/FinalizeReplication/
         '''
     
-    def createAllReplication(self):
+    def createAllReplication(self,endpoint):
         print("Create All Replication Called")
         '''
-        https://cloudbasic.net/documentation/api/
+        https://cloudbasic.net/documentation/api/CreateAllReplication/
         '''
+        print('Request URL = ' + endpoint)
+        r = requests.post(endpoint, data=self.request_parameters, headers=self.headers)
+        print('Response code: ', r.status_code)
+
+        if r.status_code not in [200]:
+            print("Error Occurred on Return",r.text)
+        else:
+            return r.json()
 
     def finalizeAllReplications(self):
         print("Finalize All Replication Called")
